@@ -1,141 +1,52 @@
-import Link from "next/link";
-import styled from "styled-components";
-import Center from "./Center";
+import React from 'react';
 
-const StyledHeader = styled.header`
-  background-color: #232323;
-`;
 
-const Logo = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 0;
-`;
-
-const StyledNav = styled.nav`
-  display: flex;
-  gap: 30px;
-`;
-
-const NavLink = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-
-  a {
-    color: #aaa;
-    text-decoration: none;
-    position: relative;
-  }
-
-  &:hover a {
-    color: #fff;
-  }
-
-  ul {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #232323;
-    list-style: none;
-    padding: 10px;
-    margin: 0;
-    display: none;
-  }
-
-  &:hover ul {
-    display: block;
-  }
-
-  li {
-    margin-bottom: 5px;
-  }
-
-  /* Indicator styles */
-  &::before {
-    content: "";
-    position: absolute;
-    top: 8px; /* Adjust the top position for alignment */
-    right: -12px; /* Adjust the right margin for the gap */
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid #aaa;
-    transition: color 0.3s;
-  }
-
-  &:hover::before {
-    border-top-color: #fff;
-  }
-
-  /* Indicator visible only if there are li elements */
-  &:not(:has(ul li))::before {
-    display: none;
-  }
-`;
-
-const SubMenuLink = styled(Link)`
-  color: #aaa;
-  text-decoration: none;
-  display: block;
-  padding: 5px;
-
-`;
-
-export default function Header() {
+const Header = () => {
   return (
-    <StyledHeader>
-      <Center>
-        <Wrapper>
-          <Logo href={"/"}>CodeCraftingLab</Logo>
-          <StyledNav>
-            <NavLink>
-              <a href={"/categories"}>
-                Categories
+    <header className="header-area header-sticky">
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <nav className="main-nav">
+              {/* Logo Start */}
+              <a href="/" className="logo">
+                <h1>CodeCraftingLab</h1>
               </a>
-              <ul>
-                <li>
-                  <SubMenuLink href={"/categories/subcategory1"}>
-                    Subcategory 1
-                  </SubMenuLink>
-                </li>
-                <li>
-                  <SubMenuLink href={"/categories/subcategory2"}>
-                    Subcategory 2
-                  </SubMenuLink>
-                </li>
+              {/* Logo End */}
+              {/* Search Start */}
+              <div className="search-input">
+                <form id="search" action="#">
+                  <input type="text" placeholder="Type Something" id="searchText" name="searchKeyword" />
+                  <i className="fa fa-search"></i>
+                </form>
+              </div>
+              {/* Search End */}
+              {/* Menu Start */}
+              <ul className="nav">
+                <li className="scroll-to-section"><a href="categories">Categories</a></li>
+                <li className="scroll-to-section"><a href="#courses">Courses</a></li>
+                <li className="scroll-to-section"><a href="#team">Online IDE</a></li>
+                <li className="scroll-to-section"><a href="#contact">Contact </a></li>
               </ul>
-            </NavLink>
-            <NavLink>
-              <a href={"/courses"}>Courses</a>
-              <ul>
-                <li>
-                  <SubMenuLink href={"/courses/web-development"}>
-                    Web Development
-                  </SubMenuLink>
-                </li>
-                <li>
-                  <SubMenuLink href={"/courses/mobile-development"}>
-                    Mobile Development
-                  </SubMenuLink>
-                </li>
-              </ul>
-            </NavLink>
-            <NavLink>
-              <a href={"/courses"}>Online IDE</a>
-            </NavLink>
-            <NavLink>
-              <a href={"/contact"}>Contact Us</a>
-            </NavLink>
-          </StyledNav>
-        </Wrapper>
-      </Center>
-    </StyledHeader>
+              {/* Menu End */}
+            </nav>
+
+      </div>
+          </div>
+          
+        </div>
+
+
+
+      {/* Link Styles */}
+      <link rel="stylesheet" href="/styles/bootstrap.min.css" />
+      <link rel="stylesheet" href="/styles/fontawesome.css" />
+      <link rel="stylesheet" href="/styles/templatemo-scholar.css" />
+      <link rel="stylesheet" href="/styles/owl.css" />
+      <link rel="stylesheet" href="/styles/animate.css" />
+      <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    </header>
   );
-}
+};
+
+export default Header;
