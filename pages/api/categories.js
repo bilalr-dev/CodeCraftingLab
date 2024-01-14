@@ -13,23 +13,25 @@ export default async function handle(req, res) {
   }
 
   if (method === 'POST') {
-    const { name, parentCategory, courses } = req.body;
+    const { name, parentCategory, courses,categoryImage } = req.body;
     const categoryDoc = await Category.create({
       name,
       parent: parentCategory || undefined,
       courses: courses || [],
+      categoryImage: categoryImage || [],
     });
     res.json(categoryDoc);
   }
 
   if (method === 'PUT') {
-    const { _id, name, parentCategory, courses } = req.body;
+    const { _id, name, parentCategory, courses,categoryImage  } = req.body;
     const categoryDoc = await Category.findByIdAndUpdate(
       _id,
       {
         name,
         parent: parentCategory || undefined,
         courses: courses || [],
+        categoryImage: categoryImage || [],
       },
       { new: true }
     ).populate('parent').populate('courses');

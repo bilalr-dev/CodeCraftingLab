@@ -10,11 +10,13 @@ const CourseForm = ({
   youtubeUrl: existingYoutubeUrl,
   images: existingImages,
   category: assignedCategory,
+  bodyText:existingBodyText,
 }) => {
   const [title, setTitle] = useState(existingTitle || "");
   const [category, setCategory] = useState(assignedCategory || "");
   const [images, setImages] = useState(existingImages || []);
   const [description, setDescription] = useState(existingDescription || "");
+  const [bodyText, setBodyText] = useState(existingBodyText || "");
   const [youtubeUrl, setYoutubeUrl] = useState(existingYoutubeUrl || "");
   const [goToCourses, setGoToCourses] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -105,6 +107,7 @@ const CourseForm = ({
       youtubeUrl,
       images,
       category,
+      bodyText,
     };
 
     try {
@@ -163,7 +166,7 @@ const CourseForm = ({
       </h2>
       <label>
         Course name
-        <span className="text-red-500">*</span>
+        <span className="text-red-500"> *</span>
       </label>
       <input
         type="text"
@@ -178,7 +181,7 @@ const CourseForm = ({
 
       <label>
         Category
-        <span className="text-red-500">*</span>
+        <span className="text-red-500"> *</span>
       </label>
       <select
         value={category}
@@ -198,8 +201,8 @@ const CourseForm = ({
       )}
 
       <label>
-        Photo
-        <span className="text-red-500">*</span>
+        Course Thumbnail
+        <span className="text-red-500"> *</span>
       </label>
       <div className="mb-2 flex flex-wrap gap-1">
         <label className="w-24 h-24 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 text-primary rounded-sm bg-white shadow-sm border border-primary">
@@ -273,10 +276,18 @@ const CourseForm = ({
         value={description}
         onChange={(ev) => setDescription(ev.target.value)}
       />
+            <label>
+        Course 
+      </label>
+      <textarea
+        placeholder="Course"
+        value={bodyText}
+        onChange={(ev) => setBodyText(ev.target.value)}
+      />
 
       <label>
         Youtube Link
-        <span className="text-red-500">*</span>
+        <span className="text-red-500"> *</span>
       </label>
       <input
         type="text"

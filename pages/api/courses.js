@@ -17,7 +17,7 @@ export default async function handle(req, res) {
   }
 
   if (method === "POST") {
-    const { title, description, youtubeUrl, images, category } = req.body;
+    const { title, description, youtubeUrl, images, category, bodyText } = req.body;
 
     // Find the category by its ID
     const categoryDoc = await Category.findOne({ _id: category });
@@ -33,6 +33,7 @@ export default async function handle(req, res) {
       youtubeUrl,
       images,
       category: categoryDoc._id,
+      bodyText,
     });
 
     // Update the category's courses list
@@ -43,13 +44,23 @@ export default async function handle(req, res) {
   }
 
   if (method === "PUT") {
-    const { title, description, youtubeUrl, images, category, _id } = req.body;
+    const { title, description, youtubeUrl, images, category, _id, bodyText } = req.body;
     await Course.updateOne(
       { _id },
-      { title, description, youtubeUrl, images, category }
+      {
+        $set: {
+          title,
+          description,
+          youtubeUrl,
+          images,
+          category,
+          bodyText,
+        },
+      }
     );
     res.json(true);
   }
+  
 
   if (method === 'DELETE') {
     if (req.query?.id) {

@@ -3,10 +3,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { withSwal } from "react-sweetalert2";
 import ReactPaginate from 'react-paginate';
+import Spinner from "@/components/Spinner";
 
 function Categories({ swal }) {
   const [editedCategory, setEditedCategory] = useState(null);
   const [name, setName] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [isUploading, setIsUploading] = useState(false);
+  const [categoryImage, setCategoryImage] = useState([]);
   const [parentCategory, setParentCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -27,16 +32,30 @@ function Categories({ swal }) {
     });
   }
 
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
+
   async function saveCategory(ev) {
     ev.preventDefault();
     setFormSubmitted(true);
-    if (!name.trim()) {
+
+    if (!name.trim() || categoryImage.length === 0) {
+      // Display an error message for no image uploaded
+      console.error("Error: No image uploaded");
       return;
     }
+
     const data = {
       name,
       parentCategory,
+      categoryImage,
     };
+
     if (editedCategory) {
       data._id = editedCategory._id;
       await axios.put("/api/categories", data);
@@ -44,8 +63,10 @@ function Categories({ swal }) {
     } else {
       await axios.post("/api/categories", data);
     }
+
     setName("");
     setParentCategory("");
+    setCategoryImage([]);
     setFormSubmitted(false);
     fetchCategories();
   }
@@ -54,6 +75,7 @@ function Categories({ swal }) {
     setEditedCategory(category);
     setName(category.name);
     setParentCategory(category.parent?._id);
+    setCategoryImage(category.categoryImage || []); 
   }
 
   function deleteCategory(category) {
@@ -75,6 +97,24 @@ function Categories({ swal }) {
         }
       });
   }
+
+  const uploadImage = async (ev) => {
+    const file = ev.target?.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setIsUploading(true);
+      const data = new FormData();
+      data.append("file", file);
+
+      try {
+        const res = await axios.post("/api/upload", data);
+        setCategoryImage([res.data.links[0]]);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+
+      setIsUploading(false);
+    }
+  };
 
   function deleteAllCategories() {
     swal
@@ -120,7 +160,7 @@ function Categories({ swal }) {
           : "Create new category"}
         <span className="text-red-500"> *</span>
       </label>
-  
+
       <form onSubmit={saveCategory}>
         <div className="flex gap-1">
           <input
@@ -150,27 +190,85 @@ function Categories({ swal }) {
           </div>
         )}
         <div className="mb-2"></div>
+        <label>
+            Category Thumbnail
+            <span className="text-red-500"> *</span>
+          </label>
         <div className="flex gap-1">
-          <button
-            type="submit"
-            className="btn-primary py-2 px-4"
-          >
-            Save
-          </button>
-          {editedCategory && (
-            <button
-              type="button"
-              onClick={() => {
-                setEditedCategory(null);
-                setName("");
-                setParentCategory("");
-              }}
-              className="btn-default px-4 py-2 border rounded-md"
-            >
-              Cancel
-            </button>
-          )}
+
+          <div className="mb-2 flex flex-wrap gap-1">
+            <label className="w-24 h-24 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 text-primary rounded-sm bg-white shadow-sm border border-primary">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                />
+              </svg>
+              <div>Add image</div>
+              <input type="file" accept="image/*" onChange={uploadImage} className="hidden" />
+            </label>
+            {!!categoryImage?.length &&
+              categoryImage.map((link) => (
+                <div
+                  key={link}
+                  className="relative h-24"
+                  onClick={() => handleImageClick(link)}
+                >
+                  <img
+                    src={link}
+                    alt=""
+                    className="w-64 h-48 ml-2 object-cover rounded-lg cursor-pointer hover:opacity-75"
+                  />
+                  {selectedImage === link && (
+                    <button
+                      className="absolute top-1 right-1 text-white bg-red-500 rounded-full p-1 hover:bg-red-600"
+                      onClick={handleCloseModal}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                        stroke="currentColor"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              ))}
+            {isUploading && (
+              <div className="h-24 flex items-center">
+                <Spinner />
+              </div>
+            )}
+          </div>
         </div>
+
+        {(categoryImage.length === 0 && formSubmitted) && (
+          <div className="text-red-500 mt-2">
+            Image is required.
+          </div>
+        )}
+        <button
+              type="submit"
+              className="btn-primary py-2 px-4"
+            >
+              Save
+            </button>
       </form>
       {!editedCategory && (
         <div>
