@@ -11,6 +11,9 @@ export default function LatestCourses({ courses }) {
     setSelectedFilter(filter);
   };
 
+  // Sort courses by updatedAt in descending order
+  const sortedCourses = [...courses].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
   return (
     <div>
       <section className="section courses" id="courses">
@@ -49,42 +52,40 @@ export default function LatestCourses({ courses }) {
           <div className="row event_box">
             {/* Course items */}
             {/* Repeat this block for each course */}
-            {courses?.length > 0 &&
-              courses
-                .filter((course) => selectedFilter === '*' || selectedFilter === course.category.name)
-                .map((course) => (
-                  <div key={course._id} className="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6">
-                    <div className="events_item">
-                      <div className="thumb">
-                        {/* Use Next.js Image component for optimized image loading */}
-                        <a href={`/courses/${course._id}`}>
+            {sortedCourses
+              .filter((course) => selectedFilter === '*' || selectedFilter === course.category.name)
+              .map((course) => (
+                <div key={course._id} className="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6">
+                  <div className="events_item">
+                    <div className="thumb">
+                      {/* Use Next.js Image component for optimized image loading */}
+                      <a href={`/courses/${course._id}`}>
                         <Image src={course.images[0]} alt="" width={300} height={180} layout="responsive" />
-
-                        </a>
-                        {/* Display both parent and child category */}
-                        <span className="category">
-                          {course.category.parent ? course.category.parent.name + ' > ' : ''}
-                          {course.category.name}
-                        </span>
-                      </div>
-                      <div className="down-content">
-                        <span className="author">CodeCraftingLab</span>
-                        <h4>{course.title}</h4>
-                        <span className="author">
-                          Last Updated:{' '}
-                          {new Intl.DateTimeFormat('en-US', {
-                            year: 'numeric',
-                            month: 'numeric',
-                            day: 'numeric',
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            timeZoneName: 'short',
-                          }).format(new Date(course.updatedAt))}
-                        </span>
-                      </div>
+                      </a>
+                      {/* Display both parent and child category */}
+                      <span className="category">
+                        {course.category.parent ? course.category.parent.name + ' > ' : ''}
+                        {course.category.name}
+                      </span>
+                    </div>
+                    <div className="down-content">
+                      <span className="author">CodeCraftingLab</span>
+                      <h4>{course.title}</h4>
+                      <span className="author">
+                        Last Updated:{' '}
+                        {new Intl.DateTimeFormat('en-US', {
+                          year: 'numeric',
+                          month: 'numeric',
+                          day: 'numeric',
+                          hour: 'numeric',
+                          minute: 'numeric',
+                          timeZoneName: 'short',
+                        }).format(new Date(course.updatedAt))}
+                      </span>
                     </div>
                   </div>
-                ))}
+                </div>
+              ))}
             {/* End of Course items */}
           </div>
         </div>

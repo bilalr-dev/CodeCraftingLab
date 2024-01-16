@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const FloatingButtonContainer = styled.div`
   position: fixed;
-  bottom: 14px;
+  bottom: ${({ visible }) => (visible ? '14px' : '-50px')};
   right: 14px;
   display: flex;
   justify-content: center;
@@ -26,6 +26,7 @@ const FloatingButtonContainer = styled.div`
     background-color: #5C4CAE;
   }
 `;
+
 
 const SvgIcon = styled.svg`
   width: 18px; /* Adjust the width as needed */

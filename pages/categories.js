@@ -1,20 +1,31 @@
+import CategoriesCatalog from "@/components/CategoriesCatalog";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
-import CategoriesCatalog from "@/components/CategoriesCatalog";
-
 import Footer from "@/components/Footer";
 import FloatingButton from "@/components/FloatingButton";
 
-export default function Categories(){
-    return(
-        <div>
+import { mongooseConnect } from "@/lib/mongoose";
+import { Category } from "@/models/Category";
+
+export default function Categories({ allCategories }) {    return(
+        <>
         <Header />
         <Banner />
-
-        <CategoriesCatalog />
+        <CategoriesCatalog categories={allCategories} />
         <FloatingButton />
         <Footer /> 
-      </div>
+      </>
 
     );
+}
+
+export async function getServerSideProps() {
+  await mongooseConnect();
+  const allCategories = await Category.find({});
+
+  return {
+    props: {
+      allCategories: JSON.parse(JSON.stringify(allCategories)),
+    },
+  };
 }

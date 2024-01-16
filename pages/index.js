@@ -13,7 +13,7 @@ import FloatingButton from "@/components/FloatingButton";
 
 export default function HomePage({ newCourses }) {
   return (
-    <div>
+    <>
       <Header />
       <Banner />
       <Services />
@@ -22,7 +22,7 @@ export default function HomePage({ newCourses }) {
       <ContactUs />
       <FloatingButton />
       <Footer />
-    </div>
+    </>
   );
 }
 

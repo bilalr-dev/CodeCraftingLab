@@ -377,11 +377,11 @@ Header Style
 }
 
 .background-header .main-nav .logo,
-.background-header .main-nav #search {
+.background-header .main-nav #search  {
   margin-top: 18px;
 }
 
-.header-area .main-nav #search {
+.header-area .main-nav #search  {
   position: relative;
 }
 
@@ -994,7 +994,7 @@ Courses Style
 --------------------------------------------- 
 */
 
-.courses {
+.courses,.categories {
   margin-top: 160px;
 }
 
