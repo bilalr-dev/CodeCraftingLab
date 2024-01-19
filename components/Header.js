@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 
@@ -9,9 +10,9 @@ const Header = () => {
           <div className="col-12">
             <nav className="main-nav">
               {/* Logo Start */}
-              <a href="/" className="logo">
+              <Link href="/" className="logo">
                 <h1>CodeCraftingLab</h1>
-              </a>
+              </Link>
               {/* Logo End */}
               {/* Search Start */}
               <div className="search-input">
@@ -23,10 +24,10 @@ const Header = () => {
               {/* Search End */}
               {/* Menu Start */}
               <ul className="nav">
-                <li className="scroll-to-section"><a href="categories">Categories</a></li>
-                <li className="scroll-to-section"><a href="#courses">Courses</a></li>
-                <li className="scroll-to-section"><a href="#team">Online IDE</a></li>
-                <li className="scroll-to-section"><a href="#contact">Contact </a></li>
+                <li className="scroll-to-section"><Link href="/categories">Categories</Link></li>
+                <li className="scroll-to-section"><Link href="/courses">Courses</Link></li>
+                <li className="scroll-to-section"><Link href="/#ide">Online IDE</Link></li>
+                <li className="scroll-to-section"><Link href="/#contact">Contact </Link></li>
               </ul>
               {/* Menu End */}
             </nav>

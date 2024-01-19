@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 
 const AboutUs = () => {
@@ -68,7 +69,7 @@ const AboutUs = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                  Navigate to the <a href='/categories'><strong>Categories</strong></a> section, where you can select the specific category you wish to explore. Within each <code>category</code>, you'll discover associated courses. Feel free to commence with any course of your choice, or alternatively, follow the structured plan we have curated for your learning journey.
+                  Navigate to the <Link href='/categories'><strong>Categories</strong></Link> section, where you can select the specific category you wish to explore. Within each <code>category</code>, you&apos;ll discover associated courses. Feel free to commence with any course of your choice, or alternatively, follow the structured plan we have curated for your learning journey.
                   </div>
                 </div>
               </div>
@@ -93,7 +94,7 @@ const AboutUs = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                  <strong>CodeCraftingLab</strong> provides a well-structured plan. In the <a href='/categories'><strong>Categories</strong></a> section, find our categories alphabetically sorted. Access associated courses by clicking each category's card.
+                  <strong>CodeCraftingLab</strong> provides a well-structured plan. In the <Link href='/categories'><strong>Categories</strong></Link> section, find our categories alphabetically sorted. Access associated courses by clicking each category&apos;s card.
 <br/>
 In the <a href='/courses'><strong>Courses</strong></a> section, explore all courses sorted alphabetically. Choose or search for any course you prefer.
 <br/>
@@ -122,7 +123,7 @@ Visit the <a href='/ide'><strong>Online IDE</strong></a> section to use our web-
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                    <strong>CodeCraftingLab</strong> is a free of charges platform, you don't have to pay anything.
+                    <strong>CodeCraftingLab</strong> is a free of charges platform, you don&apos;t have to pay anything.
                   </div>
                 </div>
               </div>
@@ -147,7 +148,7 @@ Visit the <a href='/ide'><strong>Online IDE</strong></a> section to use our web-
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                  Navigate to our <a href='/contact'><strong>Contact Us</strong></a> section and effortlessly fill out the form in no time.
+                  Navigate to our <Link href='/#contact'><strong>Contact Us</strong></Link> section and effortlessly fill out the form in no time.
                   </div>
                 </div>
               </div>

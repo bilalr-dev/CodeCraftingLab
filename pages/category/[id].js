@@ -1,60 +1,43 @@
-import { useState } from 'react';
+// pages/category/[id].js
+import Header from "@/components/Header";
+import Banner from "@/components/Banner";
+import Footer from "@/components/Footer";
+import FloatingButton from "@/components/FloatingButton";
+import { mongooseConnect } from "@/lib/mongoose";
+import { Category } from "@/models/Category";
 import Image from 'next/image';
 
-export default function LatestCourses({ courses }) {
-  const [selectedFilter, setSelectedFilter] = useState('*');
-
-  const uniqueCategories = [...new Set(courses.map((course) => course.category.name))];
-
-  const handleFilterClick = (filter) => {
-    setSelectedFilter(filter);
-  };
-
-  const sortedCourses = [...courses].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+export default function CoursePage({ category }) {
+  // Function to format date
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+    const formattedDate = new Date(dateString).toLocaleDateString('en-US', options);
+    return formattedDate;
+  }
 
   return (
-    <div>
+    <>
+      <Header />
+      <Banner />
       <section className="section courses" id="courses">
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center">
               <div className="section-heading">
-                <h6>Latest Courses</h6>
-                <h2>Latest Courses</h2>
+                <h2>{category.name}</h2>
               </div>
             </div>
           </div>
-          <ul className="event_filter">
-            <li>
-              <a
-                className={selectedFilter === '*' ? 'is_active' : ''}
-                href="#!"
-                onClick={() => handleFilterClick('*')}
-              >
-                Show All
-              </a>
-            </li>
-            {uniqueCategories.map((category) => (
-              <li key={category}>
-                <a
-                  className={selectedFilter === category ? 'is_active' : ''}
-                  href="#!"
-                  onClick={() => handleFilterClick(category)}
-                >
-                  {category}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {/* Display courses if they exist */}
           <div className="row event_box">
-            {sortedCourses
-              .filter((course) => selectedFilter === '*' || selectedFilter === course.category.name)
-              .map((course) => (
+            {category.courses && category.courses.length > 0 ? (
+              category.courses.map((course) => (
                 <div key={course._id} className="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6">
                   <div className="events_item">
                     <div className="thumb">
+                      {/* Use Next.js Image component for optimized image loading */}
                       <a href={`/course/${course._id}`}>
-                        <Image
+                      <Image
                           src={course.images[0]}
                           alt=""
                           width={300}
@@ -62,11 +45,7 @@ export default function LatestCourses({ courses }) {
                           objectFit="cover"
                           className="course-image"
                         />
-                     </a>
-                      <span className="category">
-                        {course.category.parent ? course.category.parent.name + ' > ' : ''}
-                        {course.category.name}
-                      </span>
+                      </a>
                     </div>
                     <div className="down-content">
                       <span className="author">CodeCraftingLab</span>
@@ -85,10 +64,35 @@ export default function LatestCourses({ courses }) {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <p>No courses</p>
+            )}
           </div>
         </div>
       </section>
-    </div>
+      <FloatingButton />
+      <Footer />
+    </>
   );
+}
+
+export async function getServerSideProps(context) {
+  await mongooseConnect();
+  const { id } = context.query;
+  const category = await Category.findById(id).populate('parent').populate('courses');
+
+  if (!category) {
+    return {
+      notFound: true,
+    };
+  }
+
+  console.log('Fetched Category:', category);
+
+  return {
+    props: {
+      category: JSON.parse(JSON.stringify(category)),
+    },
+  };
 }

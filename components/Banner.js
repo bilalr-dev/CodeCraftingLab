@@ -51,7 +51,7 @@ const Banner = () => {
                   </p>
                   <div className="buttons">
                     <div className="icon-button">
-                      <a href="#"><i className="fas fa-solid fa-book"></i> What's CCL?</a>
+                      <a href="#"><i className="fas fa-solid fa-book"></i> What&apos;s CCL?</a>
                     </div>
                   </div>
                 </div>
@@ -75,7 +75,7 @@ const Banner = () => {
                   <span className="category">Contact Us</span>
                   <h2>You have a question? Get in touch with us</h2>
                   <p>
-                    Need assistance on your coding journey? Don't hesitate to contact us! Explore our Contact Section for a direct connection to CodeCraftingLab. Your questions are our top priority, ensuring prompt and helpful responses. 🚀📧
+                    Need assistance on your coding journey? Do not hesitate to contact us! Explore our Contact Section for a direct connection to CodeCraftingLab. Your questions are our top priority, ensuring prompt and helpful responses. 🚀📧
                   </p>
                   <div className="buttons">
                     <div className="icon-button">

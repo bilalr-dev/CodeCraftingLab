@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
-export default function CategoriesCatalog({ categories }) {
+export default function CoursesCatalog({ courses }) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortedCategories, setSortedCategories] = useState([]);
+  const [sortedCourses, setSortedCourses] = useState([]);
 
-  // Effect to sort categories alphabetically on component mount
+  // Effect to sort courses by updatedAt time on component mount
   useEffect(() => {
-    const sorted = sortCategories(categories);
-    setSortedCategories(sorted);
-  }, [categories]);
+    const sorted = sortCourses(courses);
+    setSortedCourses(sorted);
+  }, [courses]);
 
-  // Sort categories alphabetically by name
-  const sortCategories = (categoriesToSort) => {
-    return [...categoriesToSort].sort((a, b) => a.name.localeCompare(b.name));
+  // Sort courses by updatedAt time
+  const sortCourses = (coursesToSort) => {
+    return [...coursesToSort].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
   };
 
   // Handle search input change
@@ -21,23 +21,23 @@ export default function CategoriesCatalog({ categories }) {
     const searchTerm = event.target.value.toLowerCase();
     setSearchTerm(searchTerm);
 
-    // Filter and sort categories based on the search term
-    const filteredCategories = categories.filter(
-      (category) => category.name.toLowerCase().includes(searchTerm)
+    // Filter and sort courses based on the search term
+    const filteredCourses = courses.filter(
+      (course) => course.title.toLowerCase().includes(searchTerm)
     );
 
-    setSortedCategories(sortCategories(filteredCategories));
+    setSortedCourses(sortCourses(filteredCourses));
   };
 
   return (
     <div>
-      <section className="section categories" id="categories">
+      <section className="section courses" id="courses">
         <div className="container">
           <div className="row">
             <div className="col-lg-12 text-center">
               <div className="section-heading">
-                <h6>All categories</h6>
-                <h2>All categories</h2>
+                <h6>All Courses</h6>
+                <h2>All Courses</h2>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@ export default function CategoriesCatalog({ categories }) {
             <div>
               <input
                 type="text"
-                placeholder="Search for a category..."
+                placeholder="Search for a course..."
                 value={searchTerm}
                 onChange={handleSearchChange}
                 className="shadow appearance-none border rounded w-full py-1 px-4 mb-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -53,16 +53,16 @@ export default function CategoriesCatalog({ categories }) {
             </div>
           </div>
           <div className="row event_box">
-            {sortedCategories.map((category) => (
+            {sortedCourses.map((course) => (
               <div
-                key={category._id}
+                key={course._id}
                 className="col-lg-4 col-md-6 align-self-center mb-30 event_outer col-md-6"
               >
                 <div className="events_item">
                   <div className="thumb">
-                    <a href={`/category/${category._id}`}>
+                    <a href={`/course/${course._id}`}>
                       <Image
-                        src={category.categoryImage[0]}
+                        src={course.images[0]}
                         alt=""
                         width={300}
                         height={180}
@@ -70,13 +70,21 @@ export default function CategoriesCatalog({ categories }) {
                         className="course-image"
                       />
                     </a>
-                    <span className="category">
-                      {category.parent ? category.parent.name + ' > ' : ''}
-                      {category.name}
-                    </span>
                   </div>
                   <div className="down-content">
-                    <span className="author">{category.name}</span>
+                    <span className="author">CodeCraftingLab</span>
+                    <h4>{course.title}</h4>
+                    <span className="author">
+                      Last Updated:{' '}
+                      {new Intl.DateTimeFormat('en-US', {
+                        year: 'numeric',
+                        month: 'numeric',
+                        day: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric',
+                        timeZoneName: 'short',
+                      }).format(new Date(course.updatedAt))}
+                    </span>
                   </div>
                 </div>
               </div>
