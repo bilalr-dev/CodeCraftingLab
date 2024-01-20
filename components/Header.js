@@ -14,14 +14,6 @@ const Header = () => {
                 <h1>CodeCraftingLab</h1>
               </Link>
               {/* Logo End */}
-              {/* Search Start */}
-              <div className="search-input">
-                <form id="search" action="#">
-                  <input type="text" placeholder="Type Something" id="searchText" name="searchKeyword" />
-                  <i className="fa fa-search"></i>
-                </form>
-              </div>
-              {/* Search End */}
               {/* Menu Start */}
               <ul className="nav">
                 <li className="scroll-to-section"><Link href="/categories">Categories</Link></li>

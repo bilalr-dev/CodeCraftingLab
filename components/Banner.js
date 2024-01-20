@@ -1,7 +1,7 @@
-// components/Banner.js
-
 import React, { useEffect } from 'react';
 import Script from 'next/script';
+import Link from 'next/link';
+
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Banner = () => {
@@ -51,7 +51,7 @@ const Banner = () => {
                   </p>
                   <div className="buttons">
                     <div className="icon-button">
-                      <a href="#"><i className="fas fa-solid fa-book"></i> What&apos;s CCL?</a>
+                      <a href="#about_us"><i className="fas fa-solid fa-book"></i> What&apos;s CCL?</a>
                     </div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@ const Banner = () => {
                   </p>
                   <div className="buttons">
                     <div className="icon-button">
-                      <a href="#"><i className="fas fa-solid fa-terminal"></i> GoTo IDE</a>
+                      <Link href="/ide"><i className="fas fa-solid fa-terminal"></i> GoTo IDE</Link>
                     </div>
                   </div>
                 </div>
@@ -79,7 +79,7 @@ const Banner = () => {
                   </p>
                   <div className="buttons">
                     <div className="icon-button">
-                      <a href="#"><i className="fas fa-solid fa-paper-plane"></i> Contact Us</a>
+                      <a href="#contact"><i className="fas fa-solid fa-paper-plane"></i> Contact Us</a>
                     </div>
                   </div>
                 </div>

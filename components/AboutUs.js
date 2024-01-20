@@ -3,34 +3,30 @@ import React, { useEffect } from 'react';
 
 const AboutUs = () => {
   useEffect(() => {
-    // Add Bootstrap JavaScript for accordion functionality
     const bootstrapScript = document.createElement('script');
-    bootstrapScript.src = '/vendor/bootstrap/js/bootstrap.min.js'; // Adjust the path accordingly
+    bootstrapScript.src = '/vendor/bootstrap/js/bootstrap.min.js'; 
     bootstrapScript.async = true;
     document.body.appendChild(bootstrapScript);
 
-    // Add jQuery JavaScript files
     const jQueryScript1 = document.createElement('script');
-    jQueryScript1.src = '/vendor/jquery/jquery.js'; // Adjust the path accordingly
+    jQueryScript1.src = '/vendor/jquery/jquery.js';
     jQueryScript1.async = true;
     document.body.appendChild(jQueryScript1);
 
     const jQueryScript2 = document.createElement('script');
-    jQueryScript2.src = '/vendor/jquery/jquery.min.js'; // Adjust the path accordingly
+    jQueryScript2.src = '/vendor/jquery/jquery.min.js'; 
     jQueryScript2.async = true;
     document.body.appendChild(jQueryScript2);
 
     const jQuerySlimScript1 = document.createElement('script');
-    jQuerySlimScript1.src = '/vendor/jquery/jquery.slim.js'; // Adjust the path accordingly
+    jQuerySlimScript1.src = '/vendor/jquery/jquery.slim.js'; 
     jQuerySlimScript1.async = true;
     document.body.appendChild(jQuerySlimScript1);
 
     const jQuerySlimScript2 = document.createElement('script');
-    jQuerySlimScript2.src = '/vendor/jquery/jquery.slim.min.js'; // Adjust the path accordingly
-    jQuerySlimScript2.async = true;
+    jQuerySlimScript2.src = '/vendor/jquery/jquery.slim.min.js'; 
     document.body.appendChild(jQuerySlimScript2);
 
-    // Return cleanup function to remove dynamically added scripts
     return () => {
       document.body.removeChild(bootstrapScript);
       document.body.removeChild(jQueryScript1);
@@ -41,14 +37,13 @@ const AboutUs = () => {
   }, []);
 
   return (
-    <div className="section about-us">
+    <div id='about_us'>
+      <div className="section about-us">
       <link rel="stylesheet" href="/bootstrap.min.css" />
       <div className="container">
         <div className="row">
           <div className="col-lg-6 offset-lg-1">
             <div className="accordion" id="accordionExample">
-              {/* Accordion items */}
-              {/* Item 1 */}
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingOne">
                   <button
@@ -73,7 +68,6 @@ const AboutUs = () => {
                   </div>
                 </div>
               </div>
-              {/* Item 2 */}
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingTwo">
                   <button
@@ -96,13 +90,12 @@ const AboutUs = () => {
                   <div className="accordion-body">
                   <strong>CodeCraftingLab</strong> provides a well-structured plan. In the <Link href='/categories'><strong>Categories</strong></Link> section, find our categories alphabetically sorted. Access associated courses by clicking each category&apos;s card.
 <br/>
-In the <a href='/courses'><strong>Courses</strong></a> section, explore all courses sorted alphabetically. Choose or search for any course you prefer.
+In the <Link href='/courses'><strong>Courses</strong></Link> section, explore all courses sorted alphabetically. Choose or search for any course you prefer.
 <br/>
-Visit the <a href='/ide'><strong>Online IDE</strong></a> section to use our web-based Integrated Development Environment for coding, testing, debugging, and learning efficiently.
+Visit the <Link href='/ide'><strong>Online IDE</strong></Link> section to use our web-based Integrated Development Environment for coding, testing, debugging, and learning efficiently.
                   </div>
                 </div>
               </div>
-              {/* Item 3 */}
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingThree">
                   <button
@@ -127,7 +120,6 @@ Visit the <a href='/ide'><strong>Online IDE</strong></a> section to use our web-
                   </div>
                 </div>
               </div>
-              {/* Item 4 */}
               <div className="accordion-item">
                 <h2 className="accordion-header" id="headingFour">
                   <button
@@ -152,7 +144,6 @@ Visit the <a href='/ide'><strong>Online IDE</strong></a> section to use our web-
                   </div>
                 </div>
               </div>
-              {/* End Accordion items */}
             </div>
           </div>
           <div className="col-lg-5 align-self-center">
@@ -168,6 +159,7 @@ Visit the <a href='/ide'><strong>Online IDE</strong></a> section to use our web-
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
