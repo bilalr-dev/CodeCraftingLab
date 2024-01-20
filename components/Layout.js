@@ -22,6 +22,7 @@ export default function Layout({children}) {
               src="https://www.vectorlogo.zone/logos/mongodb/mongodb-icon.svg"
               width={48}
               height={48}
+              alt="CordeCraftingLab"
             />
             <span className="text-3xl text-gray-800	">CodeCraftingLab Admin Panel</span>
           </h1>
