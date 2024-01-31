@@ -1,3 +1,6 @@
+// Set state variables with fetched data
+// Встановлення змінних стану з отриманими даними
+
 import Layout from "@/components/Layout";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -6,6 +9,8 @@ import ReactPaginate from 'react-paginate';
 import Spinner from "@/components/Spinner";
 
 function Categories({ swal }) {
+  // State variables for category data and form handling
+  // Змінні стану для даних категорії та обробки форми
   const [editedCategory, setEditedCategory] = useState(null);
   const [name, setName] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -16,14 +21,18 @@ function Categories({ swal }) {
   const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const [formSubmitted, setFormSubmitted] = useState(false); // New state variable
-  const itemsPerPage = 10;
+  const [formSubmitted, setFormSubmitted] = useState(false); 
+  const itemsPerPage = 8;
 
   useEffect(() => {
+    // Fetch categories when component mounts
+    // Отримати категорії при монтажі компонента
     fetchCategories();
   }, []);
 
   function fetchCategories() {
+    // Fetch categories from the API and sort them alphabetically
+    // Отримати категорії з API та впорядкувати їх за алфавітом
     axios.get("/api/categories").then((result) => {
       const sortedCategories = result.data.sort((a, b) =>
         a.name.localeCompare(b.name)
@@ -33,20 +42,26 @@ function Categories({ swal }) {
   }
 
   const handleImageClick = (image) => {
+    // Set selected image on thumbnail click
+    // Встановити вибране зображення при кліку на ескіз
     setSelectedImage(image);
   };
 
   const handleCloseModal = () => {
+    // Close image modal
+    // Закрити модальне вікно зображення
     setSelectedImage(null);
   };
 
   async function saveCategory(ev) {
+    // Handle form submission to save or update a category
+    // Обробка відправки форми для збереження чи оновлення категорії
     ev.preventDefault();
     setFormSubmitted(true);
 
     if (!name.trim() || categoryImage.length === 0) {
       // Display an error message for no image uploaded
-      console.error("Error: No image uploaded");
+      // Відображення повідомлення про помилку, якщо зображення не завантажено
       return;
     }
 
@@ -57,13 +72,19 @@ function Categories({ swal }) {
     };
 
     if (editedCategory) {
+      // If editing, include category ID and send a PUT request
+      // Якщо ви редагуєте, включіть ідентифікатор категорії та надішліть запит PUT
       data._id = editedCategory._id;
       await axios.put("/api/categories", data);
       setEditedCategory(null);
     } else {
+      // If creating new category, send a POST request
+      // Якщо створюєте нову категорію, відправте запит POST
       await axios.post("/api/categories", data);
     }
 
+    // Reset form fields and fetch updated categories
+    // Скидання полів форми та отримання оновлених категорій
     setName("");
     setParentCategory("");
     setCategoryImage([]);
@@ -72,6 +93,8 @@ function Categories({ swal }) {
   }
 
   function editCategory(category) {
+    // Set the selected category for editing
+    // Встановити вибрану категорію для редагування
     setEditedCategory(category);
     setName(category.name);
     setParentCategory(category.parent?._id);
@@ -79,6 +102,8 @@ function Categories({ swal }) {
   }
 
   function deleteCategory(category) {
+    // Confirm and delete a category
+    // Підтвердити та видалити категорію
     swal
       .fire({
         title: "Are you sure?",
@@ -99,6 +124,8 @@ function Categories({ swal }) {
   }
 
   const uploadImage = async (ev) => {
+    // Handle image upload and update categoryImage state
+    // Обробка завантаження зображення та оновлення стану categoryImage
     const file = ev.target?.files[0];
     if (file && file.type.startsWith("image/")) {
       setIsUploading(true);
@@ -109,7 +136,7 @@ function Categories({ swal }) {
         const res = await axios.post("/api/upload", data);
         setCategoryImage([res.data.links[0]]);
       } catch (error) {
-        console.error("Error uploading image:", error);
+          throw error;
       }
 
       setIsUploading(false);
@@ -117,8 +144,9 @@ function Categories({ swal }) {
   };
 
   function deleteAllCategories() {
-    swal
-      .fire({
+    // Confirm and delete all categories
+    // Підтвердити та видалити всі категорії
+    swal.fire({
         title: "Are you sure?",
         text: "This will delete all categories. Are you sure you want to proceed?",
         showCancelButton: true,
@@ -143,11 +171,11 @@ function Categories({ swal }) {
     );
 
   const pageCount = Math.ceil(filteredCategories.length / itemsPerPage);
-
   const handlePageChange = ({ selected }) => {
+    // Update current page when pagination changes
+    // Оновлення поточної сторінки при зміні пагінації
     setCurrentPage(selected);
   };
-
   return (
     <Layout>
       <h1>Categories</h1>
@@ -160,7 +188,6 @@ function Categories({ swal }) {
           : "Create new category"}
         <span className="text-red-500"> *</span>
       </label>
-
       <form onSubmit={saveCategory}>
         <div className="flex gap-1">
           <input
@@ -195,7 +222,6 @@ function Categories({ swal }) {
             <span className="text-red-500"> *</span>
           </label>
         <div className="flex gap-1">
-
           <div className="mb-2 flex flex-wrap gap-1">
             <label className="w-24 h-24 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 text-primary rounded-sm bg-white shadow-sm border border-primary">
               <svg
@@ -215,8 +241,7 @@ function Categories({ swal }) {
               <div>Add image</div>
               <input type="file" accept="image/*" onChange={uploadImage} className="hidden" />
             </label>
-            {!!categoryImage?.length &&
-              categoryImage.map((link) => (
+            {!!categoryImage?.length &&              categoryImage.map((link) => (
                 <div
                   key={link}
                   className="relative h-24"
@@ -275,7 +300,7 @@ function Categories({ swal }) {
           <div className="mt-4">
             <input
               type="text"
-              placeholder="Search categories by name or parent category"
+              placeholder="Search for a category by name or parent category"
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
               className="px-4 py-2 border rounded-md"
@@ -334,7 +359,6 @@ function Categories({ swal }) {
                 ))}
             </tbody>
           </table>
-
           {filteredCategories.length > 0 && (
             <div className="pagination-container mt-4">
               <ReactPaginate
