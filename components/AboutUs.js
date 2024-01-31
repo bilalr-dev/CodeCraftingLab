@@ -64,7 +64,7 @@ const AboutUs = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                  Navigate to the <Link href='/categories'><strong>Categories</strong></Link> section, where you can select the specific category you wish to explore. Within each <code>category</code>, you&apos;ll discover associated courses. Feel free to commence with any course of your choice, or alternatively, follow the structured plan we have curated for your learning journey.
+                  &emsp;Navigate to the <Link href='/categories'><strong>Categories</strong></Link> section, where you can select the specific category you wish to explore. Within each <code>category</code>, you&apos;ll discover associated courses. Feel free to commence with any course of your choice.
                   </div>
                 </div>
               </div>
@@ -88,12 +88,11 @@ const AboutUs = () => {
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                  <strong>CodeCraftingLab</strong> provides a well-structured plan. In the <Link href='/categories'><strong>Categories</strong></Link> section, find our categories alphabetically sorted. Access associated courses by clicking each category&apos;s card.
+                  <strong>&emsp;CodeCraftingLab</strong> provides a well-structured plan. In the <Link href='/categories'><strong>Categories</strong></Link> section, find our categories alphabetically sorted. Access associated courses by clicking each category&apos;s card.
 <br/>
-In the <Link href='/courses'><strong>Courses</strong></Link> section, explore all courses sorted alphabetically. Choose or search for any course you prefer.
+&emsp;In the <Link href='/courses'><strong>Courses</strong></Link> section, explore all courses sorted by Last Updated date. Choose or search for any course you prefer.
 <br/>
-Visit the <Link href='/ide'><strong>Online IDE</strong></Link> section to use our web-based Integrated Development Environment for coding, testing, debugging, and learning efficiently.
-                  </div>
+&emsp;Explore the <Link href='/quiz'><strong>Quizzes</strong></Link> section to assess and elevate your proficiency in programming languages and various Computer Science topics.</div>
                 </div>
               </div>
               <div className="accordion-item">
@@ -116,7 +115,7 @@ Visit the <Link href='/ide'><strong>Online IDE</strong></Link> section to use ou
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                    <strong>CodeCraftingLab</strong> is a free of charges platform, you don&apos;t have to pay anything.
+                    <strong>&emsp;CodeCraftingLab</strong> is a free of charges platform, you don&apos;t have to pay anything.
                   </div>
                 </div>
               </div>
@@ -140,7 +139,7 @@ Visit the <Link href='/ide'><strong>Online IDE</strong></Link> section to use ou
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
-                  Navigate to our <Link href='/#contact'><strong>Contact Us</strong></Link> section and effortlessly fill out the form in no time.
+                  &emsp;Navigate to our <Link href='/#contact'><strong>Contact Us</strong></Link> section and effortlessly fill out the form in no time.
                   </div>
                 </div>
               </div>

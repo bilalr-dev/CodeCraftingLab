@@ -58,14 +58,13 @@ const Banner = () => {
               </div>
               <div className="item item-2">
                 <div className="header-text">
-                  <span className="category">Online IDE</span>
-                  <h2>Get the best result out of your effort!</h2>
+                  <span className="category">Quizzes</span>
+                  <h2>Test your knowledge now!</h2>
                   <p>
-                    Discover our Online IDE: your coding sanctuary!💻 Unleash creativity, debug with precision, and experience a personalized haven for solo coding mastery. Elevate your skills in this empowering environment. Happy coding! 🚀✨
-                  </p>
+                  Whether you&apos;re a novice or a pro, our diverse coding challenges offer a rewarding adventure. Test your knowledge across various levels, and enjoy the journey of continuous learning. Happy quizzing on your coding exploration! 💡                  </p>
                   <div className="buttons">
                     <div className="icon-button">
-                      <Link href="/ide"><i className="fas fa-solid fa-terminal"></i> GoTo IDE</Link>
+                      <Link href="/quiz"><i className="fas fa-solid fa-lightbulb"></i> Start A Quiz</Link>
                     </div>
                   </div>
                 </div>
@@ -79,7 +78,7 @@ const Banner = () => {
                   </p>
                   <div className="buttons">
                     <div className="icon-button">
-                      <a href="#contact"><i className="fas fa-solid fa-paper-plane"></i> Contact Us</a>
+                      <Link href="/#contact"><i className="fas fa-solid fa-paper-plane"></i> Contact Us</Link>
                     </div>
                   </div>
                 </div>

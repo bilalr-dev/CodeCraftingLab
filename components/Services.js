@@ -1,4 +1,5 @@
 // components/Services.js
+import Link from 'next/link';
 import React from 'react';
 
 const Services = () => {
@@ -17,7 +18,7 @@ const Services = () => {
                 <p>
                 Embark on coding effortlessly in our Beginner-Friendly section. Navigable tutorials and a supportive community await, providing an enriching initiation into the programming world for all enthusiasts.                </p>
                 <div className="main-button">
-                  <a href="#">Read More</a>
+                  <Link href="/courses">Read More</Link>
                 </div>
               </div>
             </div>
@@ -33,7 +34,7 @@ const Services = () => {
                 <p>
                 Explore and learn without cost! Our platform is committed to providing free access to coding resources, making programming education accessible to everyone seeking an enriching learning experience.                </p>
                 <div className="main-button">
-                  <a href="#">Read More</a>
+                  <Link href="#">Read More</Link>
                 </div>
               </div>
             </div>
@@ -42,15 +43,15 @@ const Services = () => {
           <div className="col-lg-4 col-md-6">
           <div className="service-item">
               <div className="icon">
-                <img src="/images/aichat.png" alt="ai chatbot" />
+                <img src="/images/quiz.png" alt="quiz" />
               </div>
               <div className="main-content">
-                <h4>AI Chatbot Assistance</h4>
+                <h4>Learn with Quizzes</h4>
                 <p>
-                Enhance your coding experience with our AI Chatbot. Utilize real-time assistance, ask coding queries, and receive instant answers. Seamlessly integrate AI into your learning journey for quick and efficient problem-solving.
+                Level up your coding prowess with interactive quizzes, covering basics to advanced concepts. Boost proficiency in a concise, engaging format for a holistic grasp of programming languages.
                 </p>
                 <div className="main-button">
-                  <a href="#">Read More</a>
+                  <Link href="/quiz">Start Quiz</Link>
                 </div>
               </div>
             </div>          </div>

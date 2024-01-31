@@ -1,7 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-
-
 const Header = () => {
   return (
     <header className="header-area header-sticky">
@@ -18,28 +16,20 @@ const Header = () => {
               <ul className="nav">
                 <li className="scroll-to-section"><Link href="/categories">Categories</Link></li>
                 <li className="scroll-to-section"><Link href="/courses">Courses</Link></li>
-                <li className="scroll-to-section"><Link href="/#ide">Online IDE</Link></li>
-                <li className="scroll-to-section"><Link href="/#contact">Contact </Link></li>
+                <li className="scroll-to-section"><Link href="/quiz">Quizzes</Link></li>
+                <li className="scroll-to-section"><Link href="/#contact">Contact</Link></li>
               </ul>
               {/* Menu End */}
+              <a className='menu-trigger'>
+                <span>Menu</span>
+              </a>
             </nav>
-
-      </div>
+            </div>
           </div>
-          
         </div>
-
-
-
       {/* Link Styles */}
-      <link rel="stylesheet" href="/styles/bootstrap.min.css" />
-      <link rel="stylesheet" href="/styles/fontawesome.css" />
-      <link rel="stylesheet" href="/styles/templatemo-scholar.css" />
-      <link rel="stylesheet" href="/styles/owl.css" />
-      <link rel="stylesheet" href="/styles/animate.css" />
-      <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-    </header>
+
+        </header>
   );
 };
-
 export default Header;

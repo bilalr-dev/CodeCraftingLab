@@ -1,4 +1,3 @@
-// pages/index.js
 import LatestCourses from "@/components/LatestCourses";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";

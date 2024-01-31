@@ -1,5 +1,3 @@
-// components/FloatingButton.js
-
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 
@@ -33,8 +31,8 @@ const FloatingButton = () => {
   return (
     <Image
       src="/images/gototop.png"
-      alt="Scroll to Top"
-      onClick={scrollToTop}
+      alt="GoTo Top"
+      onClick={isVisible ? scrollToTop : null} 
       width={17}
       height={180}
       style={{
@@ -45,8 +43,9 @@ const FloatingButton = () => {
         cursor: 'pointer',
         transition: 'bottom 1s ease-in-out, opacity 1s ease-in-out',
         opacity: isVisible ? 1 : 0,
-        width: 'auto', 
+        width: 'auto',
         height: 'auto',
+        pointerEvents: isVisible ? 'auto' : 'none', 
       }}
     />
   );
